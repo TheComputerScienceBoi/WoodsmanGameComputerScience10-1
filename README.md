@@ -1,0 +1,8 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                          "
+"This is a repository full of code for me and my fellow classmates to use  "
+"If you want to copy or access the files just tell me before hand in person"
+"If not you will feel guilty                                               "
+"Well hope you enjoy!!!                                                    "
+"                                                                          "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
