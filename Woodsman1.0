@@ -1,0 +1,92 @@
+import pygame, sys
+from pygame.locals import *
+
+"""Clock Setup"""
+clock = pygame.time.Clock()
+screen = pygame.display.set_mode((1024,1024))
+
+
+pygame.mouse.set_visible(0)
+
+
+"""Loading and resizing images"""
+forest1 = pygame.image.load("Forest1.png")
+woodsman = pygame.image.load("WoodsmanFront.png")
+
+
+"""Variables for blits woodsman onto screen"""
+woodsman_top = screen.get_height() - woodsman.get_height()
+woodsman_left = screen.get_width()/2 - woodsman.get_width()/2
+
+
+"""Setting up movement variables"""
+moveLeft = False
+moveRight = False
+moveUp = False
+moveDown = False
+MOVESPEED = 1
+
+
+#Running the game
+while True:
+
+    x = 0
+    y = 0
+
+    screen.blit(woodsman,(x-woodsman.get_width()/2,y-woodsman.get_height()/2))
+    
+    pygame.display.update()
+
+    """Checking and assigning events"""
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        if event.type == KEYDOWN:
+            """Changing the keyboard variables"""
+            if event.key == K_LEFT or event.key == K_a:
+                moveRight = False
+                moveLeft = True
+            if event.key == K_RIGHT or event.key == K_d:
+                moveLeft = False
+                moveRight = True
+            if event.key == K_UP or event.key == K_w:
+                moveDown = False
+                moveUp = True
+            if event.key == K_DOWN or event.key == K_s:
+                moveUp = False
+                moveDown = True
+        """Assigning more keyboard variables when not pressing the keys"""
+        if event.type == KEYUP:
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            if event.key == K_LEFT or event.key == K_a:
+                moveLeft = False
+            if event.key == K_RIGHT or event.key == K_d:
+                moveRight = False
+            if event.key == K_UP or event.key == K_w:
+                moveUp = False
+            if event.key == K_DOWN or event.key == K_s:
+                moveDown = False
+
+    """Moving the player and changing values"""
+    if moveDown and woodsman.bottom < WINDOWHEIGHT:
+        woodsman.top += MOVESPEED
+        y += 1
+    if moveUp and woodsman.top > 0:
+        woodsman.top -= MOVESPEED
+        y -= 1
+    if moveLeft and woodsman.left > 0:
+        woodsman.left -= MOVESPEED
+        x -= 1
+    if moveRight and woodsman.right < WINDOWWIDTH:
+        woodsman.right += MOVESPEED
+        x += 1
+
+    """Draw player, and screen"""
+    screen.fill((0,0,0))
+    screen.blit(forest1,(0,0))
+    screen.blit(woodsman,(x-woodsman.get_width()/2,y-woodsman.get_height()/2))
+    clock.tick(60)
+    
+
